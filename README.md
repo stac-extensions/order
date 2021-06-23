@@ -26,11 +26,11 @@ This scenario describes the "activation" of an *offline* product at the provider
 
 ![Activating Offline Assets](images/diagrams/activate-offline/activate-offline.svg)
 
-### Ordering Paying Item
+### Data Ordering per user
 
-This scenario describes the "ordering" of a *paying* product by a commercial provider.
+This scenario describes the "ordering" of data product by a free or commercial provider. This use case is based on a per-user exchange with the provider for an individual service. The order information is not stored as a metadata of the Item but in the ordering information of the user request.
 
-![Ordering Paying Item](images/diagrams/ordering-paying/ordering-paying.svg)
+![Data Ordering per user](images/diagrams/ordering-paying/ordering-paying.svg)
 
 ## Item Properties or Asset Fields
 
@@ -40,7 +40,8 @@ The following fields may be either in the Item properties or Asset fields in ter
 | -------------------- | ------------------------- | ----------- |
 | order:status   | string                    | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
 | order:id         | string | Optional identifier of the order |
-| order:expiration_date | datetime                | indicate the validity of the order. |
+| order:date      | datetime | indicates the order time
+| order:expiration_date | datetime                | indicates the validity time of the order. |
 
 ### Additional Field Information
 
