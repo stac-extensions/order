@@ -1,14 +1,14 @@
-# Template Extension Specification
+# Order Extension Specification
 
-- **Title:** Template
-- **Identifier:** <https://stac-extensions.github.io/template/v1.0.0/schema.json>
-- **Field Name Prefix:** template
+- **Title:** Order
+- **Identifier:** <https://stac-extensions.github.io/order/v1.0.0/schema.json>
+- **Field Name Prefix:** order
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
-- **Owner**: @your-gh-handles @person2
+- **Owner**: @emmanuelmathot
 
-This document explains the Template Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-This is the place to add a short introduction.
+This document explains the Order Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
+This extension allows assets ordering management within STAC specification.
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
@@ -16,29 +16,44 @@ This is the place to add a short introduction.
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-## Item Properties and Collection Fields
+## Ordering Scenarios
+
+This extension can be used to enable several ordering scenarios. Some examples are described in the following sections
+
+### Activating Offline Assets
+
+This scenario describes the "activation" of an *offline* product at the provider storage. It uses the [storage extension](https://github.com/stac-extensions/storage) to describe storage information necessary for the ordering status. The following diagram describe the states transition of the asset in a STAC Item.
+
+![Activating Offline Assets](images/diagrams/activate-offline/activate-offline.svg)
+
+### Ordering Paying Item
+
+This scenario describes the "ordering" of a *paying* product by a commercial provider.
+
+![Ordering Paying Item](images/diagrams/ordering-paying/ordering-paying.svg)
+
+## Item Properties or Asset Fields
+
+The following fields may be either in the Item properties or Asset fields in terms of scope of the ordering
 
 | Field Name           | Type                      | Description |
 | -------------------- | ------------------------- | ----------- |
-| template:new_field   | string                    | **REQUIRED**. Describe the required field... |
-| template:xyz         | [XYZ Object](#xyz-object) | Describe the field... |
-| template:another_one | \[number]                 | Describe the field... |
+| order:status   | string                    | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
+| order:id         | string | Optional identifier of the order |
+| order:expiration_date | datetime                | indicate the validity of the order. |
 
 ### Additional Field Information
 
-#### template:new_field
+#### order:status
 
-This is a much more detailed description of the field `template:new_field`...
+The main field describing the order status
 
-### XYZ Object
-
-This is the introduction for the purpose and the content of the XYZ Object...
-
-| Field Name  | Type   | Description |
-| ----------- | ------ | ----------- |
-| x           | number | **REQUIRED**. Describe the required field... |
-| y           | number | **REQUIRED**. Describe the required field... |
-| z           | number | **REQUIRED**. Describe the required field... |
+- `orderable`: The item or asset is orderable via the provider scenario
+- `ordered`: The item or asset is ordered and the provider is preparing to make it available.
+- `shipping` The item or asset order are being processed by the provider to provide you with the asset(s).
+- `delivered`: The provider has delivered your order and asset(s) are available.
+- `unable_to_deliver`: The provider is not able to deliver the order.
+- `canceled` The order has been canceled.
 
 ## Relation types
 
@@ -47,7 +62,7 @@ The following types should be used as applicable `rel` types in the
 
 | Type                | Description |
 | ------------------- | ----------- |
-| fancy-rel-type      | This link points to a fancy resource. |
+| order      | This link points to a dcoument describing the ordering terms and conditions of the Item provider. |
 
 ## Contributing
 

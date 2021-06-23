@@ -1,0 +1,23 @@
+@startuml
+
+[*] --> Offline
+Offline --> Activating : Asset ordered
+note left of Offline : **Asset** is not\ndirectly downloadable
+Offline : **storage:tier** field indicates\na tier corresponding to\n"offline" storage of the provider
+Offline : **href** field links to ordering url or\nhelp link about the ordering
+
+Activating -> Online
+Activating : **href** field links to order url or future accessible link
+Activating : **order:id** field MAY indicate the order identifier
+Activating : **order:status** field MUST state "**shipping**"
+
+
+note right of Online : **Asset** is accessible
+
+Online -> Offline : Asset back to\n"offline" tier storage
+Online : **href** field links to the online asset
+Online : **storage:tier** field indicates a tier corresponding to\n"online" storage of the provider
+Online : **order:status** field MUST state "**delivered**"
+Online : **order:expiration_date** field MAY give the\nexpiration of the online asset
+
+@enduml

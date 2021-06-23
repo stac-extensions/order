@@ -1,0 +1,25 @@
+@startuml
+
+!pragma teoz true
+
+Client -> Provider: Query Product
+Provider -> Client: Stac Item describing product
+note right: **order** link type indicates how to do ordering\n**order:status** states **orderable**
+
+Client -> Provider: Order Item
+Provider -> Client: Link to private Stac Item as purchase order
+note right: **order:status** states **ordered**
+
+...Order being processed...
+
+Client -> Provider: Link to private Stac Item
+Provider -> Client: updated Stac Item
+note right: **order:status** states **shipping**
+
+...Order being delivered...
+
+Client -> Provider: Link to private Stac Item
+Provider -> Client: update Stac Item as delivery form
+note right: **order:status** states **delivered**
+
+@enduml

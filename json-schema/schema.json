@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/template/v1.0.0/schema.json#",
-  "title": "Template Extension",
-  "description": "STAC Template Extension for STAC Items and STAC Collections.",
+  "$id": "https://stac-extensions.github.io/order/v1.0.0/schema.json#",
+  "title": "order Extension",
+  "description": "STAC order Extension for STAC Items and STAC Collections.",
   "oneOf": [
     {
       "$comment": "This is the schema for STAC Items. Remove this object if this extension only applies to Collections.",
@@ -23,7 +23,7 @@
                 {
                   "$comment": "Require fields here for item properties.",
                   "required": [
-                    "template:new_field"
+                    "order:new_field"
                   ]
                 },
                 {
@@ -90,7 +90,7 @@
         "stac_extensions": {
           "type": "array",
           "contains": {
-            "const": "https://stac-extensions.github.io/template/v1.0.0/schema.json"
+            "const": "https://stac-extensions.github.io/order/v1.0.0/schema.json"
           }
         }
       }
@@ -99,10 +99,10 @@
       "$comment": "Add your new fields here. Don't require them here, do that above in the item schema.",
       "type": "object",
       "properties": {
-        "template:new_field": {
+        "order:new_field": {
           "type": "string"
         },
-        "template:xyz": {
+        "order:xyz": {
           "type": "object",
           "required": [
             "x",
@@ -121,7 +121,7 @@
             }
           }
         }, 
-        "template:another_one": {
+        "order:another_one": {
           "type": "array", 
           "items": {
             "type": "number"
@@ -129,8 +129,8 @@
         }
       },
       "patternProperties": {
-        "^(?!template:)": {
-          "$comment": "Above, change `template` to the prefix of this extension"
+        "^(?!order:)": {
+          "$comment": "Above, change `order` to the prefix of this extension"
         }
       },
       "additionalProperties": false
