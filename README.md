@@ -32,16 +32,23 @@ This scenario describes the "ordering" of data product by a free or commercial p
 
 ![Data Ordering per user](images/diagrams/ordering-paying/ordering-paying.svg)
 
-## Item Properties or Asset Fields
+## Item Properties or Collections and Asset Fields
 
-The following fields may be either in the Item properties or Asset fields in terms of scope of the ordering
+The fields in the table below can be used in these parts of STAC documents:
+- [x] Catalogs
+- [x] Collections
+- [x] Item Properties (incl. Summaries in Collections)
+- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [ ] Links
 
-| Field Name           | Type                      | Description |
-| -------------------- | ------------------------- | ----------- |
-| order:status   | string                    | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
-| order:id         | string | Optional identifier of the order |
-| order:date      | datetime | indicates the order time
-| order:expiration_date | datetime                | indicates the validity time of the order. |
+| Field Name            | Type     | Description                                                                                     |
+| --------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| order:status          | string   | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
+| order:id              | string   | Optional identifier of the order                                                                |
+| order:date            | datetime | indicates the order time                                                                        |
+| order:expiration_date | datetime | indicates the validity time of the order.                                                       |
+
+These fields have different meaning depending on where they are used. When used as an Item properties or top-level Collection field, they refer to an order of all data referenced in the Item or Collection, which may include the metadata itself. When used in an Asset Object, the order refer to the particular data asset linked to in the Asset Object.
 
 ### Additional Field Information
 
@@ -61,9 +68,9 @@ The main field describing the order status
 The following types should be used as applicable `rel` types in the
 [Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
 
-| Type                | Description |
-| ------------------- | ----------- |
-| order      | This link points to a dcoument describing the ordering terms and conditions of the Item provider. |
+| Type  | Description                                                                                                   |
+| ----- | ------------------------------------------------------------------------------------------------------------- |
+| order | This link points to a document describing further the order (e.g. terms and conditions of the Item provider.) |
 
 ## Contributing
 
