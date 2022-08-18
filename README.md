@@ -39,7 +39,7 @@ The order information is not stored as a metadata of the Item but in the orderin
 ## Item Properties or Collections and Asset Fields
 
 The fields in the table below can be used in these parts of STAC documents:
-- [x] Catalogs
+- [ ] Catalogs
 - [x] Collections
 - [x] Item Properties (incl. Summaries in Collections)
 - [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
@@ -48,9 +48,9 @@ The fields in the table below can be used in these parts of STAC documents:
 | Field Name            | Type     | Description                                                                                     |
 | --------------------- | -------- | ----------------------------------------------------------------------------------------------- |
 | order:status          | string   | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
-| order:id              | string   | Optional identifier of the order                                                                |
-| order:date            | datetime | indicates the order time                                                                        |
-| order:expiration_date | datetime | indicates the validity time of the order.                                                       |
+| order:id              | string   | Identifier of the order                                                                |
+| order:date            | datetime | Indicates the order time                                                                        |
+| order:expiration_date | datetime | Indicates the validity time of the order.                                                       |
 
 These fields have different meaning depending on where they are used.
 When used as an Item properties or top-level Collection field, they refer to an order of all data referenced in the Item or Collection, 

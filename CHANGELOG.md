@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v1.0.0] - 2022-08-18
 
-Initial release of the STAC Order Extension.
+- Initial release of the STAC Order Extension.
 
 [Unreleased]: <https://github.com/stac-extensions/order/compare/v1.0.0...HEAD>
+[v1.0.0]: <https://github.com/stac-extensions/order/tree/v1.0.0>
