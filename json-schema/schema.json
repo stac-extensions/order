@@ -8,6 +8,9 @@
       "$comment": "This is the schema for STAC Items. Remove this object if this extension only applies to Collections.",
       "allOf": [
         {
+          "$ref": "#/definitions/stac_extensions"
+        },
+        {
           "type": "object",
           "required": [
             "type",
@@ -21,9 +24,9 @@
             "properties": {
               "allOf": [
                 {
-                  "$comment": "Require fields here for item properties.",
+                  "$comment": "Require fields here for Item Properties.",
                   "required": [
-                    "order:new_field"
+                    "order:status"
                   ]
                 },
                 {
@@ -32,50 +35,109 @@
               ]
             },
             "assets": {
+              "$comment": "This validates the fields in Item Assets, but does not require them.",
               "type": "object",
               "additionalProperties": {
                 "$ref": "#/definitions/fields"
               }
             }
           }
-        },
-        {
-          "$ref": "#/definitions/stac_extensions"
         }
       ]
     },
     {
-      "$comment": "This is the schema for STAC Collections. Remove this object if this extension does not define top-level fields for Collections AND can't be used in collection assets or item asset defintions.",
+      "$comment": "This is the schema for STAC Collections.",
+      "type": "object",
       "allOf": [
         {
-          "type": "object",
           "required": [
             "type"
           ],
           "properties": {
             "type": {
               "const": "Collection"
-            },
-            "assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
-            },
-            "item_assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
             }
           }
         },
         {
           "$ref": "#/definitions/stac_extensions"
+        }
+      ],
+      "anyOf": [
+        {
+          "$comment": "This is the schema for the top-level fields in a Collection. Remove this if this extension does not define top-level fields for Collections.",
+          "allOf": [
+            {
+              "$comment": "Require fields here for Collections (top-level).",
+              "required": [
+                "order:status"
+              ]
+            },
+            {
+              "$ref": "#/definitions/fields"
+            }
+          ]
         },
         {
-          "$comment": "Remove this object if this extension does not define top-level fields for Collections.",
-          "$ref": "#/definitions/fields"
+          "$comment": "This validates the fields in Collection Assets, but does not require them.",
+          "required": [
+            "assets"
+          ],
+          "properties": {
+            "assets": {
+              "type": "object",
+              "not": {
+                "additionalProperties": {
+                  "not": {
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/require_any_field"
+                      },
+                      {
+                        "$ref": "#/definitions/fields"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "$comment": "This is the schema for the fields in Item Asset Definitions. It doesn't require any fields.",
+          "required": [
+            "item_assets"
+          ],
+          "properties": {
+            "item_assets": {
+              "type": "object",
+              "not": {
+                "additionalProperties": {
+                  "not": {
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/require_any_field"
+                      },
+                      {
+                        "$ref": "#/definitions/fields"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "$comment": "This is the schema for the fields in Summaries. By default, only checks the existence of the properties, but not the schema of the summaries.",
+          "required": [
+            "summaries"
+          ],
+          "properties": {
+            "summaries": {
+              "$ref": "#/definitions/require_any_field"
+            }
+          }
         }
       ]
     }
@@ -95,37 +157,33 @@
         }
       }
     },
+    "require_any_field": {
+      "$comment": "Please list all fields here so that we can force the existence of one of them in other parts of the schemas.",
+      "anyOf": [
+        {
+          "required": [
+            "order:status"
+          ]
+        }
+      ]
+    },
     "fields": {
       "$comment": "Add your new fields here. Don't require them here, do that above in the item schema.",
       "type": "object",
       "properties": {
-        "order:new_field": {
+        "order:status": {
           "type": "string"
         },
-        "order:xyz": {
-          "type": "object",
-          "required": [
-            "x",
-            "y",
-            "z"
-          ],
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
-        }, 
-        "order:another_one": {
-          "type": "array", 
-          "items": {
-            "type": "number"
-          }
+        "order:id": {
+          "type": "string"
+        },
+        "order:date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "order:expiration_date": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "patternProperties": {

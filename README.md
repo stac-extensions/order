@@ -22,13 +22,17 @@ This extension can be used to enable several ordering scenarios. Some examples a
 
 ### Activating Offline Assets
 
-This scenario describes the "activation" of an *offline* product at the provider storage. It uses the [storage extension](https://github.com/stac-extensions/storage) to describe storage information necessary for the ordering status. The following diagram describe the states transition of the asset in a STAC Item.
+This scenario describes the "activation" of an *offline* product at the provider storage. 
+It uses the [storage extension](https://github.com/stac-extensions/storage) to describe storage information necessary for the ordering status.
+The following diagram describe the states transition of the asset in a STAC Item.
 
 ![Activating Offline Assets](images/diagrams/activate-offline/activate-offline.svg)
 
 ### Data Ordering per user
 
-This scenario describes the "ordering" of data product by a free or commercial provider. This use case is based on a per-user exchange with the provider for an individual service. The order information is not stored as a metadata of the Item but in the ordering information of the user request.
+This scenario describes the "ordering" of data product by a free or commercial provider.
+This use case is based on a per-user exchange with the provider for an individual service.
+The order information is not stored as a metadata of the Item but in the ordering information of the user request.
 
 ![Data Ordering per user](images/diagrams/ordering-paying/ordering-paying.svg)
 
@@ -48,7 +52,10 @@ The fields in the table below can be used in these parts of STAC documents:
 | order:date            | datetime | indicates the order time                                                                        |
 | order:expiration_date | datetime | indicates the validity time of the order.                                                       |
 
-These fields have different meaning depending on where they are used. When used as an Item properties or top-level Collection field, they refer to an order of all data referenced in the Item or Collection, which may include the metadata itself. When used in an Asset Object, the order refer to the particular data asset linked to in the Asset Object.
+These fields have different meaning depending on where they are used.
+When used as an Item properties or top-level Collection field, they refer to an order of all data referenced in the Item or Collection, 
+which may include the metadata itself.
+When used in an Asset Object, the order refer to the particular data asset linked to in the Asset Object.
 
 ### Additional Field Information
 

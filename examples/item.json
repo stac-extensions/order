@@ -40,17 +40,10 @@
   },
   "properties": {
     "datetime": "2020-12-11T22:38:32Z",
-    "order:new_field": "test",
-    "order:xyz": {
-      "x": 1,
-      "y": 2,
-      "z": 3
-    },
-    "order:another_one": [
-      1,
-      2,
-      3
-    ]
+    "order:status": "succeeded",
+    "order:id": "123e4567-e89b-12d3-a456-426614174000",
+    "order:date": "2020-12-12T22:38:32Z",
+    "order:expiration_date": "2020-12-19T22:38:32Z"
   },
   "links": [
     {
@@ -60,8 +53,7 @@
   ],
   "assets": {
     "data": {
-      "href": "https://example.com/examples/file.xyz",
-      "order:new_field": "test"
+      "href": "https://example.com/examples/file.xyz"
     }
   }
 }
