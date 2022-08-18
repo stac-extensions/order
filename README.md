@@ -58,9 +58,10 @@ The main field describing the order status
 
 - `orderable`: The item or asset is orderable via the provider scenario
 - `ordered`: The item or asset is ordered and the provider is preparing to make it available.
+- `pending`: The item or asset is ordered but wait for an activation before being able for shipping.
 - `shipping` The item or asset order are being processed by the provider to provide you with the asset(s).
-- `delivered`: The provider has delivered your order and asset(s) are available.
-- `unable_to_deliver`: The provider is not able to deliver the order.
+- `succeeded`: The provider has delivered your order and asset(s) are available.
+- `failed`: The provider is not able to deliver the order.
 - `canceled` The order has been canceled.
 
 ## Relation types
