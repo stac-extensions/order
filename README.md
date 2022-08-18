@@ -22,26 +22,40 @@ This extension can be used to enable several ordering scenarios. Some examples a
 
 ### Activating Offline Assets
 
-This scenario describes the "activation" of an *offline* product at the provider storage. It uses the [storage extension](https://github.com/stac-extensions/storage) to describe storage information necessary for the ordering status. The following diagram describe the states transition of the asset in a STAC Item.
+This scenario describes the "activation" of an *offline* product at the provider storage. 
+It uses the [storage extension](https://github.com/stac-extensions/storage) to describe storage information necessary for the ordering status.
+The following diagram describe the states transition of the asset in a STAC Item.
 
 ![Activating Offline Assets](images/diagrams/activate-offline/activate-offline.svg)
 
 ### Data Ordering per user
 
-This scenario describes the "ordering" of data product by a free or commercial provider. This use case is based on a per-user exchange with the provider for an individual service. The order information is not stored as a metadata of the Item but in the ordering information of the user request.
+This scenario describes the "ordering" of data product by a free or commercial provider.
+This use case is based on a per-user exchange with the provider for an individual service.
+The order information is not stored as a metadata of the Item but in the ordering information of the user request.
 
 ![Data Ordering per user](images/diagrams/ordering-paying/ordering-paying.svg)
 
-## Item Properties or Asset Fields
+## Item Properties or Collections and Asset Fields
 
-The following fields may be either in the Item properties or Asset fields in terms of scope of the ordering
+The fields in the table below can be used in these parts of STAC documents:
+- [x] Catalogs
+- [x] Collections
+- [x] Item Properties (incl. Summaries in Collections)
+- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [ ] Links
 
-| Field Name           | Type                      | Description |
-| -------------------- | ------------------------- | ----------- |
-| order:status   | string                    | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
-| order:id         | string | Optional identifier of the order |
-| order:date      | datetime | indicates the order time
-| order:expiration_date | datetime                | indicates the validity time of the order. |
+| Field Name            | Type     | Description                                                                                     |
+| --------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| order:status          | string   | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
+| order:id              | string   | Optional identifier of the order                                                                |
+| order:date            | datetime | indicates the order time                                                                        |
+| order:expiration_date | datetime | indicates the validity time of the order.                                                       |
+
+These fields have different meaning depending on where they are used.
+When used as an Item properties or top-level Collection field, they refer to an order of all data referenced in the Item or Collection, 
+which may include the metadata itself.
+When used in an Asset Object, the order refer to the particular data asset linked to in the Asset Object.
 
 ### Additional Field Information
 
@@ -51,9 +65,10 @@ The main field describing the order status
 
 - `orderable`: The item or asset is orderable via the provider scenario
 - `ordered`: The item or asset is ordered and the provider is preparing to make it available.
+- `pending`: The item or asset is ordered but wait for an activation before being able for shipping.
 - `shipping` The item or asset order are being processed by the provider to provide you with the asset(s).
-- `delivered`: The provider has delivered your order and asset(s) are available.
-- `unable_to_deliver`: The provider is not able to deliver the order.
+- `succeeded`: The provider has delivered your order and asset(s) are available.
+- `failed`: The provider is not able to deliver the order.
 - `canceled` The order has been canceled.
 
 ## Relation types
@@ -61,9 +76,9 @@ The main field describing the order status
 The following types should be used as applicable `rel` types in the
 [Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
 
-| Type                | Description |
-| ------------------- | ----------- |
-| order      | This link points to a dcoument describing the ordering terms and conditions of the Item provider. |
+| Type  | Description                                                                                                   |
+| ----- | ------------------------------------------------------------------------------------------------------------- |
+| order | This link points to a document describing further the order (e.g. terms and conditions of the Item provider.) |
 
 ## Contributing
 
