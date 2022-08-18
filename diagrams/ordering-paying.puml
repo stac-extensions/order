@@ -20,6 +20,6 @@ note right: **order:status** states **shipping**
 
 Client -> Provider: Link to private Stac Item
 Provider -> Client: update Stac Item as delivery form
-note right: **order:status** states **delivered**
+note right: **order:status** states **succeeded**
 
 @enduml

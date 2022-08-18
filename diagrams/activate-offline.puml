@@ -17,7 +17,7 @@ note right of Online : **Asset** is accessible
 Online -> Offline : Asset back to\n"offline" tier storage
 Online : **href** field links to the online asset
 Online : **storage:tier** field indicates a tier corresponding to\n"online" storage of the provider
-Online : **order:status** field MUST state "**delivered**"
+Online : **order:status** field MUST state "**succeeded**"
 Online : **order:expiration_date** field MAY give the\nexpiration of the online asset
 
 @enduml
