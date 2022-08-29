@@ -8,7 +8,8 @@
 - **Owner**: @emmanuelmathot
 
 This document explains the Order Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-This extension allows assets ordering management within STAC specification.  In the context of this extension, the term "order" refers to a request for data to be deliveried, served, or otherwise made available.
+This extension allows assets ordering management within STAC specification.
+In the context of this extension, the term "order" refers to a request for data to be delivered, served, or otherwise made available (e.g., after a purchase).
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
