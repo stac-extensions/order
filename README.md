@@ -52,7 +52,7 @@ The fields in the table below can be used in these parts of STAC documents:
 | order:status          | string   | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
 | order:id              | string   | Identifier of the order.                                                                        |
 | order:date            | string   | Indicates the order submission time, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). |
-| order:expiration_date | string   | Indicates the validity time of the order, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). |
+| order:expiration_date | string   | **DEPRECATED.** Indicates the validity time of the order, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use [`expires` from the timestamps extension](https://github.com/stac-extensions/timestamps/) instead. |
 
 These fields have different meaning depending on where they are used.
 When used as an Item properties or top-level Collection field, they refer to an order of all data referenced in the Item or Collection, 
@@ -77,7 +77,7 @@ The main field describing the order status
 
 The [timestamps extension](https://github.com/stac-extensions/timestamps/) and the fields
 [`created` and `updated` from common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)
-can be useful additions to the Item properties or Collection:
+can be useful addition, usually used in the Item Properties and Collections, sometimes also in the Assets:
 
 - Set `order:date` once the status switches to `ordered` (i.e. when the user submits the order).
 - Set `created` once the metadata files gets created, usually when the status is `ordered` or `shipping`.
