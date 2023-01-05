@@ -38,7 +38,7 @@ The order information is not stored as a metadata of the Item but in the orderin
 
 ![Data Ordering per user](images/diagrams/ordering-paying/ordering-paying.svg)
 
-## Item Properties or Collections and Asset Fields
+## Fields
 
 The fields in the table below can be used in these parts of STAC documents:
 - [ ] Catalogs
