@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Deprecated
+
+- Deprecated `order:expiration_date` in favor of `expires`
+
 ## [v1.0.0] - 2022-08-18
 
 - Initial release of the STAC Order Extension.
