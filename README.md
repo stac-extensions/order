@@ -77,7 +77,7 @@ The main field describing the order status
 
 The [timestamps extension](https://github.com/stac-extensions/timestamps/) and the fields
 [`created` and `updated` from common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)
-can be useful additions to the Item properties or Collection:
+can be useful addition, usually used in the Item Properties and Collections, sometimes also in the Assets:
 
 - Set `order:date` once the status switches to `ordered` (i.e. when the user submits the order).
 - Set `created` once the metadata files gets created, usually when the status is `ordered` or `shipping`.

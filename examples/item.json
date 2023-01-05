@@ -1,7 +1,8 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://stac-extensions.github.io/order/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/order/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/timestamps/v1.0.0/schema.json"
   ],
   "type": "Feature",
   "id": "item",
@@ -39,11 +40,14 @@
     ]
   },
   "properties": {
-    "datetime": "2020-12-11T22:38:32Z",
     "order:status": "succeeded",
     "order:id": "123e4567-e89b-12d3-a456-426614174000",
-    "order:date": "2020-12-12T22:38:32Z",
-    "order:expiration_date": "2020-12-19T22:38:32Z"
+    "datetime": "2017-01-01T05:12:55Z",
+    "order:date": "2020-12-12T20:01:55Z",
+    "created": "2020-12-12T20:32:22Z",
+    "updated": "2020-12-12T22:38:32Z",
+    "published": "2020-12-12T22:38:32Z",
+    "expires": "2020-12-19T22:38:32Z"
   },
   "links": [
     {
