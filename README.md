@@ -50,9 +50,9 @@ The fields in the table below can be used in these parts of STAC documents:
 | Field Name            | Type     | Description                                                                                     |
 | --------------------- | -------- | ----------------------------------------------------------------------------------------------- |
 | order:status          | string   | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
-| order:id              | string   | Identifier of the order                                                                |
-| order:date            | datetime | Indicates the order time                                                                        |
-| order:expiration_date | datetime | Indicates the validity time of the order.                                                       |
+| order:id              | string   | Identifier of the order.                                                                        |
+| order:date            | string   | Indicates the order submission time, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). |
+| order:expiration_date | string   | Indicates the validity time of the order, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). |
 
 These fields have different meaning depending on where they are used.
 When used as an Item properties or top-level Collection field, they refer to an order of all data referenced in the Item or Collection, 
@@ -65,13 +65,25 @@ When used in an Asset Object, the order refer to the particular data asset linke
 
 The main field describing the order status
 
-- `orderable`: The item or asset is orderable via the provider scenario
+- `orderable`: The item or asset is orderable via the provider scenario.
 - `ordered`: The item or asset is ordered and the provider is preparing to make it available.
 - `pending`: The item or asset is ordered but wait for an activation before being able for shipping.
-- `shipping` The item or asset order are being processed by the provider to provide you with the asset(s).
+- `shipping`: The item or asset order are being processed by the provider to provide you with the asset(s).
 - `succeeded`: The provider has delivered your order and asset(s) are available.
 - `failed`: The provider is not able to deliver the order.
 - `canceled` The order has been canceled.
+
+#### Timestamps
+
+The [timestamps extension](https://github.com/stac-extensions/timestamps/) and the fields
+[`created` and `updated` from common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)
+can be useful additions to the Item properties or Collection:
+
+- Set `order:date` once the status switches to `ordered` (i.e. when the user submits the order).
+- Set `created` once the metadata files gets created, usually when the status is `ordered` or `shipping`.
+- Set `published` once the order has `succeeded`.
+- Set the `expires` field when the order has `succeeded` and your order is meant to expire.
+- Update `updated` on each change of `order:status` and/or whenever an additional asset has been added.
 
 ## Relation types
 
