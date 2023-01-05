@@ -6,9 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- All timestamps must be in UTC ([#1095](https://github.com/radiantearth/stac-spec/issues/1095))
+
 ### Deprecated
 
 - Deprecated `order:expiration_date` in favor of `expires`
+
+### Fixed
+
+- Clarify that `order:date` is the submission time
+- Clarify that all timestamps must be formatted according to RFC3339.
+- Clarify the relation to common metadata and timestamps extension by giving guidance on how to use the fields.
 
 ## [v1.0.0] - 2022-08-18
 
