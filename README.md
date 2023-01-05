@@ -73,6 +73,18 @@ The main field describing the order status
 - `failed`: The provider is not able to deliver the order.
 - `canceled` The order has been canceled.
 
+#### Timestamps
+
+The [timestamps extension](https://github.com/stac-extensions/timestamps/) and the fields
+[`created` and `updated` from common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)
+can be useful additions to the Item properties or Collection:
+
+- Set `order:date` once the status switches to `ordered` (i.e. when the user submits the order).
+- Set `created` once the metadata files gets created, usually when the status is `ordered` or `shipping`.
+- Set `published` once the order has `succeeded`.
+- Set the `expires` field when the order has `succeeded` and your order is meant to expire.
+- Update `updated` on each change of `order:status` and/or whenever an additional asset has been added.
+
 ## Relation types
 
 The following types should be used as applicable `rel` types in the
