@@ -71,7 +71,7 @@ The main field describing the order status
 - `shipping`: The item or asset order are being processed by the provider to provide you with the asset(s).
 - `succeeded`: The provider has delivered your order and asset(s) are available.
 - `failed`: The provider is not able to deliver the order.
-- `canceled` The order has been canceled.
+- `canceled`: The order has been canceled.
 
 #### Timestamps
 
