@@ -172,7 +172,16 @@
       "type": "object",
       "properties": {
         "order:status": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "orderable",
+            "ordered",
+            "pending",
+            "shipping",
+            "succeeded",
+            "failed",
+            "canceled"
+          ]
         },
         "order:id": {
           "type": "string"
