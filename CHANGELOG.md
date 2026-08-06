@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `order:attempt_limit` and `order:attempt_number` for retry-aware ordering workflows.
+
 ### Changed
 
 - Added enum to `order:status` as defined in the README before.

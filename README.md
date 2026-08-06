@@ -47,12 +47,14 @@ The fields in the table below can be used in these parts of STAC documents:
 - [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
 - [ ] Links
 
-| Field Name            | Type     | Description                                                                                     |
-| --------------------- | -------- | ----------------------------------------------------------------------------------------------- |
-| order:status          | string   | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
-| order:id              | string   | Identifier of the order.                                                                        |
-| order:date            | string   | Indicates the order submission time, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). |
-| order:expiration_date | string   | **DEPRECATED.** Indicates the validity time of the order, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use [`expires` from the timestamps extension](https://github.com/stac-extensions/timestamps/) instead. |
+| Field Name             | Type    | Description                                                                                     |
+| ---------------------- | ------- | ----------------------------------------------------------------------------------------------- |
+| order:status           | string  | **REQUIRED**. Describe the status of the ordering. One of the value listed [here](#orderstatus) |
+| order:id               | string  | Identifier of the order.                                                                        |
+| order:date             | string  | Indicates the order submission time, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). |
+| order:attempt_limit    | integer | Maximum number of ordering attempts allowed during the current ordering lifecycle.              |
+| order:attempt_number   | integer | Number of ordering attempts initiated during the current ordering lifecycle.                    |
+| order:expiration_date  | string  | **DEPRECATED.** Indicates the validity time of the order, in UTC and formatted according to [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Use [`expires` from the timestamps extension](https://github.com/stac-extensions/timestamps/) instead. |
 
 These fields have different meaning depending on where they are used.
 When used as an Item properties or top-level Collection field, they refer to an order of all data referenced in the Item or Collection, 
@@ -72,6 +74,33 @@ The main field describing the order status
 - `succeeded`: The provider has delivered your order and asset(s) are available.
 - `failed`: The provider is not able to deliver the order.
 - `canceled`: The order has been canceled.
+
+#### Ordering attempts
+
+`order:attempt_limit` and `order:attempt_number` support providers that allow an
+order to be retried. They are particularly useful when a failure is recoverable,
+for example after a temporary provider-side or upstream processing error.
+
+- `order:attempt_limit` is the maximum number of attempts that may be initiated
+  during the current ordering lifecycle. It is a positive integer.
+- `order:attempt_number` is the number of attempts already initiated, including
+  the current attempt when one is in progress. It is a non-negative integer and
+  SHOULD NOT exceed `order:attempt_limit`.
+- The two fields SHOULD be provided together so clients can determine whether
+  another attempt remains available.
+- Their retry semantics apply only while `order:status` is `orderable` or
+  `failed`, and while the resource has not expired. When the
+  [timestamps extension](https://github.com/stac-extensions/timestamps/) field
+  `expires` is present, the resource is not expired when the current instant is
+  before or equal to `expires`.
+- Once the status moves to another value, or the current instant is later than
+  `expires`, clients MUST NOT interpret these fields as permission to initiate
+  another attempt. Providers SHOULD remove the fields when they no longer
+  describe an active retry lifecycle.
+
+The attempt number is cumulative within one ordering lifecycle and is not reset
+after a failed attempt. A provider starts a new count only when it starts a new,
+independent ordering lifecycle.
 
 #### Timestamps
 
